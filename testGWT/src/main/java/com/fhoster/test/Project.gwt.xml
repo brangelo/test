@@ -9,7 +9,6 @@
  <inherits name='com.fhoster.livetable.Livetable' />
 
  <!-- Default css -->
- <inherits name='com.google.gwt.user.theme.standard.Standard' />
 
  <!-- Bootstrap implementation -->
  <!-- <set-configuration-property name="gwtp.prebootstrapper" value="com.fhoster.test.client.core.PreBootstrapperImpl"/>
