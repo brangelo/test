@@ -1,0 +1,9 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+	<g:FlowPanel>
+		<g:SimplePanel ui:field="north" />
+		<g:SimplePanel ui:field="west" />
+		<g:SimplePanel ui:field="center" />
+		<g:SimplePanel ui:field="south" />
+	</g:FlowPanel>
+</ui:UiBinder>

@@ -1,0 +1,41 @@
+package com.fhoster.test.client.view;
+
+import com.fhoster.livetable.client.LiveTable;
+import com.fhoster.livetable.client.LiveTablePreferences;
+import com.fhoster.livetable.client.SkinType;
+import com.fhoster.livetable.client.WP_Unlimited;
+import com.fhoster.livetable.client.datasource.LiveTableDataSource;
+import com.fhoster.livetable.client.datasource.proxyDataSource.LiveTableServantProxy;
+import com.fhoster.livetable.client.datasource.proxyDataSource.LivetableServantKey;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.ViewImpl;
+import com.fhoster.test.client.presenter.LtPresenter${number};
+
+public class LtView${number} extends ViewImpl implements LtPresenter${number}.MyView {
+
+	FlowPanel container;
+
+	@Inject
+	public LtView${number}() {
+
+		final LiveTableDataSource dataSource = new LiveTableServantProxy(new LivetableServantKey<String>("lts001"), "LTServlet");
+		final LiveTablePreferences prefs = new LiveTablePreferences(new WP_Unlimited(), 15, SkinType.EF);
+
+		container = new FlowPanel();
+		
+#foreach ($ltNumber in $ltNumbers)
+		final LiveTable lt${ltNumber} = new LiveTable(dataSource, prefs);
+		lt${ltNumber}.clearSelection();
+		lt${ltNumber}.clearSearch();
+		container.add(lt${ltNumber});
+#end
+		
+	}
+
+	@Override
+	public Widget asWidget() {
+		return container;
+	}
+}

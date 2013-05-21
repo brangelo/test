@@ -1,0 +1,101 @@
+package com.fhoster.test.client.view;
+
+import com.fhoster.test.client.place.NameTokens;
+import com.fhoster.test.client.presenter.MenuPresenter;
+import com.fhoster.test.client.presenter.MenuUiHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.ViewWithUiHandlers;
+
+public class MenuView extends ViewWithUiHandlers<MenuUiHandler> implements MenuPresenter.MyView {
+
+ FlowPanel container;
+ Button home;
+ Button page1;
+ Button page2;
+ Button page3;
+ //Button livetable;
+
+ #foreach ($number in $numbers)
+ Button livetable${number};
+ #end
+
+ @Inject
+ public MenuView() {
+  container = new FlowPanel();
+
+  page1 = new Button("page 1");
+  page2 = new Button("page 2");
+  page3 = new Button("page 3");
+  home = new Button("home");
+ //livetable = new Button("livetable");
+
+  container.add(page1);
+  container.add(page2);
+  container.add(page3);
+  container.add(home);
+ //container.add(livetable);
+
+  #foreach ($number in $numbers)
+  initLtButton$number();
+  #end
+
+  initHandler();
+ }
+
+#foreach ($number in $numbers)
+
+  private void initLtButton$number(){
+   livetable${number} = new Button("livetable${number}");
+   container.add(livetable${number});
+   livetable${number}.addClickHandler(new ClickHandler() {
+
+    @Override
+    public void onClick(ClickEvent event) {
+     getUiHandlers().onLinkClicked(NameTokens.livetable${number});
+    }
+   });
+  }
+#end
+
+ private void initHandler() {
+  page1.addClickHandler(new ClickHandler() {
+
+   @Override
+   public void onClick(ClickEvent event) {
+    getUiHandlers().onLinkClicked(NameTokens.page1);
+   }
+  });
+  page2.addClickHandler(new ClickHandler() {
+
+   @Override
+   public void onClick(ClickEvent event) {
+    getUiHandlers().onLinkClicked(NameTokens.page2);
+   }
+  });
+  page3.addClickHandler(new ClickHandler() {
+
+   @Override
+   public void onClick(ClickEvent event) {
+    getUiHandlers().onLinkClicked(NameTokens.page3);
+   }
+  });
+  home.addClickHandler(new ClickHandler() {
+
+   @Override
+   public void onClick(ClickEvent event) {
+    getUiHandlers().onLinkClicked(NameTokens.home);
+   }
+  });
+ }
+
+ @Override
+ public Widget asWidget() {
+  return container;
+ }
+
+}
